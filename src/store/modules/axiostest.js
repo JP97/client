@@ -8,30 +8,18 @@ const state = {
 
 const getters = {
     getTorqueData: (state) => state.torqueData,
+    getApiLink: (state) => state.url,
 };
 
 const actions = {
-    fetchTorqueData({ commit }) {
-        console.log("in action");
-        try {
-            console.log("in try");
-            const data = axios.get(state.url);
-            const mappedData = data.map((post) => ({
-                ...post,
-            }));
-            commit("saveTorqueData", mappedData);
-        } catch (error) {
-            console.log(error);
-        }
-    },
-    fetchTorqueData2({ commit }) {
+    fetchTorqueData({ commit, getters }) {
         console.log("in action");
         try {
             console.log("in try");
             axios
-                .get(this.state.url)
+                .get(getters.getApiLink)
                 .then((result) => {
-                    commit("saveTorquqData", result.data);
+                    commit("saveTorqueData", result.data);
                 })
                 .catch((error) => {
                     throw new Error(`API: ${error}`);

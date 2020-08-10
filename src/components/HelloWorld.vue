@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import TorqueDataService from "../TorqueDataService";
+// import TorqueDataService from "../TorqueDataService";
+import { mapActions } from "vuex";
 export default {
     name: "HelloWorld",
     props: {
@@ -30,16 +31,20 @@ export default {
             specificTData: [],
         };
     },
+    methods: {
+        ...mapActions(["fetchTorqueData"]),
+    },
     async created() {
-        console.log("started fetching data");
-        try {
-            console.log("fetching all data");
-            this.torqueData = await TorqueDataService.getData();
-            console.log("fetching just one data");
-            this.specificTData = await TorqueDataService.getSpecificData(2);
-        } catch (error) {
-            this.error = error;
-        }
+        // console.log("started fetching data");
+        // try {
+        //     console.log("fetching all data");
+        //     this.torqueData = await TorqueDataService.getData();
+        //     console.log("fetching just one data");
+        //     this.specificTData = await TorqueDataService.getSpecificData(2);
+        // } catch (error) {
+        //     this.error = error;
+        // }
+        this.fetchTorqueData();
     },
 };
 </script>
